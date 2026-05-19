@@ -152,6 +152,28 @@ window.addEventListener('wheel', e => {
   velocity -= e.deltaY * 0.12;
 }, { passive: false });
 
+let touchStartY = 0;
+let touchLastY = 0;
+
+window.addEventListener('touchstart', e => {
+  touchStartY = e.touches[0].clientY;
+  touchLastY = touchStartY;
+  velocity = 0;
+}, { passive: true });
+
+window.addEventListener('touchmove', e => {
+  const y = e.touches[0].clientY;
+  const delta = y - touchLastY;
+  touchLastY = y;
+  velocity = delta * 0.8;
+  offsetY += delta;
+  layout();
+}, { passive: true });
+
+window.addEventListener('touchend', e => {
+  // velocity already set, animation loop carries it forward
+});
+
 function refresh() {
   measure();
   buildGrid();
