@@ -295,7 +295,24 @@ gallery.addEventListener('click', e => {
   if (!cell) return;
   const label = cell.dataset.label || '';
   const cat = label.split(' ')[0].toLowerCase();
-  if (CATS[cat]) {
+  if (!CATS[cat]) return;
+
+  const activeBtn = document.querySelector('.fbtn.on');
+  const alreadyActive = activeBtn?.dataset.f === cat;
+
+  if (alreadyActive) {
+    // Toggle back to all
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+    document.querySelector('.fbtn[data-f="all"]').classList.add('on');
+    pool = makePool('all');
+    buildGrid();
+    openPanel('all');
+  } else {
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+    const matchBtn = document.querySelector(`.fbtn[data-f="${cat}"]`);
+    if (matchBtn) matchBtn.classList.add('on');
+    pool = makePool(cat);
+    buildGrid();
     openPanel(cat);
   }
 });
