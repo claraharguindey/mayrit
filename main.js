@@ -140,9 +140,6 @@ function layout() {
     const id = `${item.cat}-${num}`;
     const src = `./${item.cat}/${id}.webp`;
 
-    // La celda es "visible" si está dentro del viewport O justo encima del nav
-    // El reciclado solo ocurre cuando está completamente fuera: por debajo de la pantalla
-    // O por encima del nav menos una altura de celda completa (para que no se vea el cambio)
     const isVisible = y > (NAV_H - rowH) && y < window.innerHeight + rowH;
 
     if (!isVisible && c.currentSrc !== src) {
@@ -200,36 +197,27 @@ function refresh() {
 
 window.addEventListener("resize", refresh);
 
-document.querySelectorAll(".fbtn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".fbtn").forEach((b) => b.classList.remove("on"));
-    btn.classList.add("on");
-    pool = makePool(btn.dataset.f);
-    buildGrid();
-    if (panel.classList.contains("open")) {
-      btn.dataset.f !== "all" ? renderPanel(btn.dataset.f) : renderPanelAll();
-    }
-  });
-});
+/* ── PANEL ── */
 
 const panel = document.getElementById("text-panel");
 
 function buildPanelHTML(num, title, subtitle, body, meta) {
   return `
     <div class="panel-inner">
-      <div class="panel-number">${num}</div>
-      <div class="panel-line"><h2 class="panel-title">${title}</h2></div>
-      <div class="panel-line" style="margin-bottom:1.4rem">
+      <div class="panel-left">
+        <div class="panel-number">${num}</div>
+        <h2 class="panel-title">${title}</h2>
         <p class="panel-subtitle">${subtitle}</p>
       </div>
       <div class="panel-body">${body}</div>
     </div>
     <div class="panel-footer">
-      <div class="panel-meta">${meta.map((m) => `<span>${m}</span>`).join("")}</div>
+      <div class="panel-meta">${meta.map(m => `<span>${m}</span>`).join('')}</div>
       <button class="panel-close-btn" onclick="closePanel()">Cerrar ×</button>
     </div>
   `;
 }
+
 
 function renderPanel(catKey) {
   const cat = CATS[catKey];
@@ -237,24 +225,15 @@ function renderPanel(catKey) {
 }
 
 function renderPanelAll() {
-  const intro = `<p>Los (Super)modelos, flexibles, oscuros, escalables y en permanente movimiento, ocupan y producen un espacio ambivalente de opresión y oportunidad. Su propia existencia certifica la posibilidad de un mundo distinto mientras las lógicas del canon que imponen sobre el ahora obligan a la experiencia de un presente muy concreto.</p>
-  <p>Este ensayo visual, elaborado por Archivo Orsini para MAYRIT 2026, se preocupa por los momentos y lugares (destellos y espejismos) en los que los (Super)modelos empiezan a perder su capacidad para producir sentido. Lejos de querer recurrir al optimismo propio de la imaginación radical o al tono catastrofista de aquel que cree ser capaz de predecir el fin del mundo, proponemos una metodología y unos casos de estudio que permiten compartir las grietas y litigar la idolatría del modelo.</p>
-  <p>Confiando en la anécdota y en el gesto —donde se enraízan las formas de hacer, pensar y organizarse— planteamos una investigación dividida en cuatro categorías: <em>molde, modelo extractivo, modelos taxonómicos y modelos sonoros</em>.</p>`;
-  panel.innerHTML = buildPanelHTML(
-    "00",
-    "Agotamiento y fricción del modelo",
-    "Introducción. Archivo Orsini × MAYRIT Bienal 2026.",
-    intro,
-    ["104 imágenes", "16 vídeos", "4 categorías"]
-  );
+  const intro = `<p>Los (Super)modelos, flexibles, oscuros, escalables y en permanente movimiento, ocupan y producen un espacio ambivalente de opresión y oportunidad. Su propia existencia certifica la posibilidad de un mundo distinto mientras las lógicas del canon obligan a la experiencia de un presente muy concreto.</p>
+  <p>Este ensayo visual, elaborado por Archivo Orsini para MAYRIT 2026, se preocupa por los momentos y lugares (destellos y espejismos) en los que los (Super)modelos empiezan a perder su capacidad para producir sentido. Proponemos una metodología y unos casos de estudio que permiten compartir las grietas y litigar la idolatría del modelo.</p>
+  <p>Confiando en la anécdota y en el gesto, planteamos una investigación dividida en cuatro categorías: <em>molde, modelo extractivo, modelos taxonómicos y modelos sonoros</em>.</p>`;
+  panel.innerHTML = buildPanelHTML("00", "Agotamiento y fricción del modelo", "Introducción. Archivo Orsini × MAYRIT Bienal 2026.", intro, ["104 imágenes", "4 categorías"]);
 }
 
 function openPanel(catKey) {
-  if (catKey && catKey !== "all") {
-    renderPanel(catKey);
-  } else {
-    renderPanelAll();
-  }
+  if (catKey && catKey !== "all") renderPanel(catKey);
+  else renderPanelAll();
   panel.classList.add("open");
   document.querySelector(".info-btn").classList.add("active");
 }
@@ -265,12 +244,20 @@ function closePanel() {
 }
 
 document.querySelector(".info-btn").addEventListener("click", () => {
-  if (panel.classList.contains("open")) {
-    closePanel();
-  } else {
-    const activeFilter = document.querySelector(".fbtn.on")?.dataset.f || "all";
-    openPanel(activeFilter);
-  }
+  if (panel.classList.contains("open")) closePanel();
+  else openPanel(document.querySelector(".fbtn.on")?.dataset.f || "all");
+});
+
+/* ── FILTROS ── */
+
+document.querySelectorAll(".fbtn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".fbtn").forEach((b) => b.classList.remove("on"));
+    btn.classList.add("on");
+    pool = makePool(btn.dataset.f);
+    buildGrid();
+    if (panel.classList.contains("open")) openPanel(btn.dataset.f);
+  });
 });
 
 const zbox = document.getElementById("zoom-box");
@@ -287,14 +274,11 @@ function showZoom(cell, e) {
   moveZoom(e);
 }
 
-function hideZoom() {
-  zbox.style.display = "none";
-}
+function hideZoom() { zbox.style.display = "none"; }
 
 function moveZoom(e) {
   const size = 320;
-  let x = e.clientX + 18;
-  let y = e.clientY + 18;
+  let x = e.clientX + 18, y = e.clientY + 18;
   if (x + size > window.innerWidth) x = e.clientX - size - 18;
   if (y + size > window.innerHeight) y = e.clientY - size - 18;
   zbox.style.left = x + "px";
@@ -322,6 +306,7 @@ gallery.addEventListener("click", (e) => {
   if (!CATS[cat]) return;
   const activeBtn = document.querySelector(".fbtn.on");
   const alreadyActive = activeBtn?.dataset.f === cat;
+
   if (alreadyActive) {
     document.querySelectorAll(".fbtn").forEach((b) => b.classList.remove("on"));
     document.querySelector('.fbtn[data-f="all"]').classList.add("on");
@@ -338,6 +323,7 @@ gallery.addEventListener("click", (e) => {
   }
 });
 
+/* ── INIT ── */
 refresh();
 animate();
-openPanel("all");
+setTimeout(() => openPanel("all"), 50);
