@@ -114,6 +114,7 @@ body {
   height: 48px;
   display: flex;
   align-items: center;
+  background: var(--bg);
   color: black;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -299,6 +300,7 @@ body {
 #gallery {
   position: fixed;
   inset: 0;
+  top: 48px;
   overflow: hidden;
 }
 
@@ -329,6 +331,24 @@ body {
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+}
+
+#gallery {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
 }
 
 /* ZOOM */
