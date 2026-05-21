@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archivo Orsini — (SUPER)MODELOS</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        overflow-y: auto;
+        position: static;
+        height: auto;
+      }
+
+      #info-page {
+        min-height: 100vh;
+        padding-top: 74px; /* nav orsini + nav micro */
+      }
+
+      .info-hero {
+        padding: 2.5rem 2rem 2rem;
+        border-bottom: 1px solid var(--hi);
+        display: flex;
+        gap: 2rem;
+        align-items: flex-end;
+        flex-wrap: wrap;
+      }
+
+      .info-num {
+        font-family: var(--title);
+        font-style: italic;
+        font-size: clamp(4rem, 12vw, 9rem);
+        color: rgba(0, 0, 0, 0.06);
+        line-height: 0.85;
+        user-select: none;
+        flex-shrink: 0;
+      }
+
+      .info-hero-text {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .info-title {
+        font-family: var(--title);
+        font-style: italic;
+        font-size: clamp(1.8rem, 4vw, 3.5rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .info-subtitle {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--dark);
+      }
+
+      .info-body {
+        padding: 2.5rem 2rem;
+        columns: 2;
+        column-gap: 4rem;
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--muted);
+      }
+
+      .info-body p + p {
+        margin-top: 1em;
+      }
+      .info-body em {
+        font-style: italic;
+        color: var(--ink);
+      }
+
+      @media (max-width: 600px) {
+        .info-body {
+          columns: 1;
+          padding: 1.5rem 1.2rem;
+        }
+        .info-hero {
+          padding: 1.5rem 1.2rem;
+        }
+      }
+
+      .info-footer {
+        padding: 1rem 2rem;
+        border-top: 1px solid var(--hi);
+        font-family: var(--mono);
+        font-size: 9px;
+        color: var(--dark);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .back-btn {
+        display: inline-block;
+        margin: 1.5rem 2rem;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--dark);
+        text-decoration: none;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--hi);
+        padding-bottom: 2px;
+      }
+      .back-btn:hover {
+        color: var(--ink);
+      }
+    </style>
+  </head>
+  <body>
+    <header id="orsini-header">
+      <nav id="orsini-nav">
+        <div>
+          <a class="orsini-title" href="https://archivoorsini.com/"
+            >ARCHIVO ORSINI</a
+          >
+        </div>
+        <div class="orsini-item-wrapper">
+          <li class="orsini-item">
+            <a href="https://archivoorsini.com/">Archivo</a>
+          </li>
+          <li class="orsini-item">
+            <a href="https://archivoorsini.com/colaboradoras/">Colaboradoras</a>
+          </li>
+          <li class="orsini-item">
+            <a href="https://archivoorsini.com/about/">About</a>
+          </li>
+        </div>
+        <button onclick="showMenu()" id="orsini-menu-btn">Menú</button>
+      </nav>
+      <div class="orsini-hidden-menu" id="orsini-hidden-menu">
+        <a class="orsini-hidden-item" href="https://archivoorsini.com/"
+          >Archivo</a
+        >
+        <a
+          class="orsini-hidden-item"
+          href="https://archivoorsini.com/colaboradoras"
+          >Colaboradoras</a
+        >
+        <a class="orsini-hidden-item" href="https://archivoorsini.com/about"
+          >About</a
+        >
+      </div>
+    </header>
+
+    <nav id="nav">
+      <div id="nav-label">
+        <a href="index.html" style="color: inherit; text-decoration: none"
+          >← (SUPER)MODELOS</a
+        >
+      </div>
+    </nav>
+
+    <div id="info-page"></div>
+
+    <script>
+      const CATS = {
+        all: {
+          num: "00",
+          title: "Agotamiento y fricción del modelo",
+          subtitle: "Introducción. Archivo Orsini × MAYRIT Bienal 2026.",
+          meta: ["104 imágenes", "16 vídeos", "4 categorías"],
+          body: `<p>Los (Super)modelos, flexibles, oscuros, escalables y en permanente movimiento, ocupan y producen un espacio ambivalente de opresión y oportunidad. Su propia existencia certifica la posibilidad de un mundo distinto mientras las lógicas del canon que imponen sobre el ahora obligan a la experiencia de un presente muy concreto.</p>
+        <p>Este ensayo visual, elaborado por Archivo Orsini para MAYRIT 2026, se preocupa por los momentos y lugares (destellos y espejismos) en los que los (Super)modelos empiezan a perder su capacidad para producir sentido. Lejos de querer recurrir al optimismo propio de la imaginación radical o al tono catastrofista de aquel que cree ser capaz de predecir el fin del mundo, proponemos una metodología y unos casos de estudio que permiten compartir las grietas y litigar la idolatría del modelo.</p>
+        <p>Confiando en la anécdota y en el gesto —donde se enraízan las formas de hacer, pensar y organizarse— planteamos una investigación dividida en cuatro categorías: <em>molde, modelo extractivo, modelos taxonómicos y modelos sonoros</em>.</p>`,
+        },
+        mm: {
+          num: "01",
+          title: "Modelos y moldes",
+          subtitle: "Modelar la ausencia. Vaciados, reproducciones y copias.",
+          meta: ["32 imágenes"],
+          body: `<p>A finales del siglo XIX el arqueólogo napolitano Giuseppe Fiorelli visita Pompeya. Durante el estudio de las ruinas descubre que los cadáveres pompeyanos, al pudrirse y desintegrarse rodeados de ceniza, tras el desastre y su evaporación, han dejado una capa de material duro en la que ha quedado fijada la forma de su cuerpo. El negativo de la carne. Fiorelli entendió este umbral como una oportunidad para modelar el relato y, con una mezcla de yeso y cemento que ocupó los huecos dejados por los pompeyanos, convirtió la ausencia en molde y recuperó el positivo del cadáver.</p>
+        <p>Ante la dimensión totalizadora del modelo, ante la capacidad sintética y comunicativa del canon, acercarse a la dimensión material del proceso de modelaje, acercarse al molde, dota al interesado de una pequeña oportunidad para bloquear los conductos por los que escapa la cera al ser presionada por el bronce hirviendo. Comprender o simplemente ver el molde provoca fricciones en el modelo.</p>
+        <p>Esta colección de imágenes propone interrumpir el patrón para bloquear la producción, enfriar la mufla o sobrecalentar el kiln. Este relato comienza en Pompeya y articula la narrativa deteniéndose en otros momentos en los que el molde traiciona al (Super)modelo: Pigmalión y Galatea, Santa Verónica, Duchamp o la cueva de Chauvet.</p>`,
+        },
+        me: {
+          num: "02",
+          title: "Modelos extractivos",
+          subtitle:
+            "Wanderwörter: (Super)modelos como herramientas coloniales.",
+          meta: ["28 imágenes"],
+          body: `<p>El supermodelo se enmarca en un mundo que se entiende como una red de flujos de mercancías e información. Las rutas comerciales que trajeron el café y el azúcar a nuestro territorio son las mismas que hoy atraviesan los cables submarinos de Internet. El modelo extractivo no produce nada en los lugares de donde extrae: vacía, traduce, acumula en otro sitio.</p>
+        <p>La artista belga Ana Torfs identificó seis palabras que viajan con las mercancías a lo largo de las rutas comerciales y se instalan en las lenguas de llegada borrando el rastro de donde vinieron: café, jengibre, azúcar, tabaco, azafrán, chocolate. En alemán estos términos se denominan <em>Wanderwörter</em> (palabras viajeras) porque se parecen en muchas lenguas sin que ninguna pueda reclamar su origen.</p>
+        <p>Esta colección de imágenes dota de cuerpos a la infraestructura invisibilizada que sostiene esta red. La nube es un computador que consume agua y electricidad. El cable submarino es un objeto físico tendido por barcos en el fondo del océano.</p>`,
+        },
+        mt: {
+          num: "03",
+          title: "Modelos taxonómicos",
+          subtitle: "Cuerpo y dataset. How did it make you feel?",
+          meta: ["21 imágenes"],
+          body: `<p>En 2019 la empresa IBM hace público el dataset <em>Diversity in Faces</em> (DiF) respondiendo a las quejas de sus clientes ante el mal funcionamiento de sus softwares de reconocimiento facial. Para clasificar el millón de rostros anónimos que componen el archivo, IBM determina varios parámetros: color de piel, dimensiones, simetría, poses, longitud, ancho y forma de las bocas, narices, frentes y ojos.</p>
+        <p>En términos prácticos, IBM pone en funcionamiento todas las teorías y prácticas que los mejores eugenistas y frenólogos acuñaron a lo largo del siglo XIX. En 1970, durante el Apartheid en Sudáfrica, IBM colabora con el régimen para desarrollar el pasaporte racial <em>Book of Life</em>.</p>
+        <p>El (Super)modelo, deseoso de ordenar y simplificar el mundo, nombra y etiqueta actuando de forma coordinada como espejo y molde. Como pregunta final: <em>Have you ever been treated unfairly? How did it make you feel?</em></p>`,
+        },
+        ms: {
+          num: "04",
+          title: "Modelos sonoros",
+          subtitle: "El sonido como infraestructura sensible de control.",
+          meta: ["23 imágenes"],
+          body: `<p>En el Madrid de los siglos XVII y XVIII, los chisperos fueron empujados a los márgenes de la ciudad por el ruido de su oficio. En el siglo XIX, las verduleras de La Cebada y San Ildefonso fueron agentes claves en la movilización popular. En julio de 1892, respondieron con gritos y hortalizas como proyectiles convirtiendo la ciudad en un campo de lucha durante dos días.</p>
+        <p>Ese mismo ruido expulsado a las periferias volvió al centro como protesta. Cacerolas, cencerros y calderos —herramientas de trabajo— se convertían en instrumentos políticos. En Argentina en 2001, en las plazas del Estado español en 2011, el mismo gesto.</p>
+        <p>El modelo que había expulsado el ruido aprendió a usarlo como arma. Chisperos, verduleras y manifestantes conviven con cañones de sonido de largo alcance que dispersan multitudes con dolor físico y frecuencias inaudibles para adultos que expulsan jóvenes de espacios públicos sin dejar huella visible.</p>`,
+        },
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get("cat") || "all";
+      const data = CATS[cat] || CATS["all"];
+
+      document.getElementById("info-page").innerHTML = `
+      <div class="info-hero">
+        <div class="info-num">${data.num}</div>
+        <div class="info-hero-text">
+          <h1 class="info-title">${data.title}</h1>
+          <p class="info-subtitle">${data.subtitle}</p>
+        </div>
+      </div>
+      <div class="info-body">${data.body}</div>
+      <div class="info-footer">${data.meta.map((m) => `<span>${m}</span>`).join("")}</div>
+    `;
+
+      function showMenu() {
+        const m = document.getElementById("orsini-hidden-menu");
+        const btn = document.getElementById("orsini-menu-btn");
+        const open = m.style.display === "flex";
+        m.style.display = open ? "none" : "flex";
+        btn.textContent = open ? "Menú" : "Cerrar";
+      }
+    </script>
+  </body>
+</html>
