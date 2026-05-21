@@ -235,7 +235,7 @@ function renderPanelAll() {
   const intro = `<p>Los (Super)modelos, flexibles, oscuros, escalables y en permanente movimiento, ocupan y producen un espacio ambivalente de opresión y oportunidad. Su propia existencia certifica la posibilidad de un mundo distinto mientras las lógicas del canon obligan a la experiencia de un presente muy concreto.</p>
   <p>Este ensayo visual, elaborado por Archivo Orsini para MAYRIT 2026, se preocupa por los momentos y lugares (destellos y espejismos) en los que los (Super)modelos empiezan a perder su capacidad para producir sentido. Proponemos una metodología y unos casos de estudio que permiten compartir las grietas y litigar la idolatría del modelo.</p>
   <p>Confiando en la anécdota y en el gesto, planteamos una investigación dividida en cuatro categorías: <em>molde, modelo extractivo, modelos taxonómicos y modelos sonoros</em>.</p>`;
-  panel.innerHTML = buildPanelHTML("00", "Agotamiento y fricción del modelo", "Introducción. Archivo Orsini × MAYRIT Bienal 2026.", intro, ["104 imágenes", "16 vídeos", "4 categorías"]);
+  panel.innerHTML = buildPanelHTML("00", "Agotamiento y fricción del modelo", "Introducción. Archivo Orsini × MAYRIT Bienal 2026.", intro, ["104 imágenes", "4 categorías"]);
 }
 
 function openPanel(catKey) {
