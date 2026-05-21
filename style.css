@@ -66,7 +66,7 @@ body {
   position: fixed;
   bottom: 2rem;
   left: 2rem;
-  width: min(320px, calc(50vw - 3rem));
+  width: fit-content;
   z-index: 500;
   background: var(--w);
   border: 1px solid rgba(0, 0, 0, 0.1);
