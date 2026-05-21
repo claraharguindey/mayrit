@@ -37,11 +37,91 @@ html, body {
 }
 body { position: fixed; inset: 0; }
 
-/* ── NAV ── */
+/* ── HEADER ARCHIVO ORSINI ── */
+
+#orsini-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 2000;
+}
+
+#orsini-nav {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: white;
+  border-bottom: 1px solid var(--hi);
+  height: 34px;
+}
+
+.orsini-title {
+  color: black;
+  font-size: 13px;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.orsini-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+}
+
+.orsini-item {
+  list-style: none;
+  margin-left: 1rem;
+}
+
+.orsini-item a {
+  text-decoration: none;
+  color: var(--dark);
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.orsini-item a:hover { color: var(--ink); }
+
+#orsini-menu-btn {
+  display: none;
+  padding: 0; border: none;
+  cursor: pointer; background: none;
+  font-family: var(--mono); font-size: 13px;
+  color: var(--dark);
+}
+
+.orsini-hidden-menu {
+  display: none;
+  flex-direction: column;
+  background: white;
+  border-bottom: 1px solid var(--hi);
+}
+
+.orsini-hidden-item {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: var(--dark);
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--hi);
+}
+.orsini-hidden-item:hover { color: var(--ink); }
+
+@media (max-width: 1024px) {
+  .orsini-item-wrapper { display: none; }
+  #orsini-menu-btn { display: block; }
+}
+
+/* ── NAV MICROSITE ── */
 
 #nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 34px; left: 0; right: 0;
   z-index: 1000;
   height: 40px;
   display: flex;
@@ -60,11 +140,12 @@ body { position: fixed; inset: 0; }
 
 .fbtn {
   border: none; background: transparent;
-  font-family: var(--mono); color: var(--dark);
-  font-size: 9px; padding: 0 1rem; cursor: pointer;
+  font-family: "FreeSans", "Helvetica Neue", Arial, sans-serif;
+  color: var(--dark);
+  font-size: 13px; padding: 0 1rem; cursor: pointer;
   border-left: 1px solid var(--hi);
   transition: color 0.2s; position: relative;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
 }
 .fbtn::after {
   content: ''; position: absolute;
@@ -79,31 +160,33 @@ body { position: fixed; inset: 0; }
 
 .info-btn {
   border: none; background: transparent;
-  color: var(--dark); font-family: var(--mono);
-  font-size: 9px; letter-spacing: 0.08em;
+  color: var(--dark);
+  font-family: "FreeSans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px; letter-spacing: 0.03em;
   padding: 0 1rem; cursor: pointer;
   border-left: 1px solid var(--hi);
   height: 100%; transition: color 0.2s;
 }
 .info-btn:hover, .info-btn.active { color: var(--ink); }
 
-/* ── HEADER BOX — barra horizontal completa ── */
+/* ── HEADER BOX — barra horizontal, overlay sobre la galería ── */
 
 #header-box {
   position: fixed;
-  top: 40px; left: 0; right: 0;
+  top: 74px; left: 0; right: 0;
   z-index: 500;
-  background: var(--bg);
-  border-bottom: 1px solid var(--hi);
   display: flex;
   align-items: stretch;
+  pointer-events: none;
 }
 
-/* título izquierda */
+/* título izquierda — siempre visible, mismo alto que el panel */
 #intro {
   flex-shrink: 0;
   padding: 1.4rem 1.8rem;
+  background: var(--bg);
   border-right: 1px solid var(--hi);
+  border-bottom: 1px solid var(--hi);
   pointer-events: none;
   display: flex;
   flex-direction: column;
@@ -112,6 +195,7 @@ body { position: fixed; inset: 0; }
 }
 
 .intro-tag {
+  font-family: var(--mono);
   font-size: 8px; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--dark);
 }
@@ -124,15 +208,18 @@ body { position: fixed; inset: 0; }
 }
 
 .intro-p {
+  font-family: var(--body);
   font-size: 10px; line-height: 1.5; color: var(--muted);
 }
 
-/* panel texto derecha */
+/* panel texto — overlay sobre la galería, sin altura propia cuando cerrado */
 #text-panel {
   flex: 1;
-  overflow-y: auto;
+  background: var(--bg);
+  border-bottom: 1px solid var(--hi);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   max-height: 0;
   opacity: 0;
   pointer-events: none;
@@ -143,6 +230,7 @@ body { position: fixed; inset: 0; }
   max-height: 60vh;
   opacity: 1;
   pointer-events: auto;
+  overflow-y: auto;
 }
 
 .panel-inner {
@@ -212,7 +300,7 @@ body { position: fixed; inset: 0; }
 #gallery {
   position: fixed;
   inset: 0;
-  top: 40px
+  top: 74px; /* se ajusta con JS */
   overflow: hidden;
 }
 
