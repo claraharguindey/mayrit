@@ -453,6 +453,15 @@ body {
     display: flex;
     flex-direction: column;
   }
+  .intro-tag {
+    font-size: 10px;
+  }
+
+  .intro-h {
+    font-size: 32px;
+    padding: 19px 0;
+  }
+
   #intro {
     width: 100%;
     height: 200px;
