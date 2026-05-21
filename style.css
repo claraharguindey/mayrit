@@ -169,10 +169,11 @@ body { position: fixed; inset: 0; }
 }
 .info-btn:hover, .info-btn.active { color: var(--ink); }
 
-/* ── HEADER BOX — barra horizontal, overlay sobre la galería ── */
+/* ── HEADER BOX */
 
 #header-box {
   position: fixed;
+  min-height: 270px;
   top: 74px; left: 0; right: 0;
   z-index: 500;
   display: flex;
@@ -180,7 +181,6 @@ body { position: fixed; inset: 0; }
   pointer-events: none;
 }
 
-/* título izquierda — siempre visible, mismo alto que el panel */
 #intro {
   flex-shrink: 0;
   padding: 1.4rem 1.8rem;
@@ -219,27 +219,23 @@ body { position: fixed; inset: 0; }
   border-bottom: 1px solid var(--hi);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+  overflow-y: auto;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #text-panel.open {
-  max-height: 60vh;
   opacity: 1;
   pointer-events: auto;
-  overflow-y: auto;
 }
 
 .panel-inner {
-  padding: 1.4rem 2rem 1rem;
+  padding: 2rem 2.5rem 1.8rem;
   flex: 1;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1.5rem;
-  align-items: start;
+  align-items: center;
 }
 
 .panel-left {

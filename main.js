@@ -64,7 +64,7 @@ function makePool(filter) {
 let pool = makePool("all");
 
 const GAP = 8;
-const NAV_H = 48;
+const NAV_H = 74; // 34px header Orsini + 40px nav microsite
 
 const gallery = document.getElementById("gallery");
 const vgrid = document.getElementById("vgrid");
@@ -190,6 +190,14 @@ window.addEventListener("touchmove", (e) => {
   layout();
 }, { passive: true });
 
+function showMenu() {
+  const m = document.getElementById('orsini-hidden-menu');
+  const btn = document.getElementById('orsini-menu-btn');
+  const open = m.style.display === 'flex';
+  m.style.display = open ? 'none' : 'flex';
+  btn.textContent = open ? 'Menú' : 'Cerrar';
+}
+
 function refresh() {
   measure();
   buildGrid();
@@ -213,7 +221,6 @@ function buildPanelHTML(num, title, subtitle, body, meta) {
     </div>
     <div class="panel-footer">
       <div class="panel-meta">${meta.map(m => `<span>${m}</span>`).join('')}</div>
-      <button class="panel-close-btn" onclick="closePanel()">Cerrar ×</button>
     </div>
   `;
 }
@@ -228,25 +235,18 @@ function renderPanelAll() {
   const intro = `<p>Los (Super)modelos, flexibles, oscuros, escalables y en permanente movimiento, ocupan y producen un espacio ambivalente de opresión y oportunidad. Su propia existencia certifica la posibilidad de un mundo distinto mientras las lógicas del canon obligan a la experiencia de un presente muy concreto.</p>
   <p>Este ensayo visual, elaborado por Archivo Orsini para MAYRIT 2026, se preocupa por los momentos y lugares (destellos y espejismos) en los que los (Super)modelos empiezan a perder su capacidad para producir sentido. Proponemos una metodología y unos casos de estudio que permiten compartir las grietas y litigar la idolatría del modelo.</p>
   <p>Confiando en la anécdota y en el gesto, planteamos una investigación dividida en cuatro categorías: <em>molde, modelo extractivo, modelos taxonómicos y modelos sonoros</em>.</p>`;
-  panel.innerHTML = buildPanelHTML("00", "Agotamiento y fricción del modelo", "Introducción. Archivo Orsini × MAYRIT Bienal 2026.", intro, ["104 imágenes", "4 categorías"]);
+  panel.innerHTML = buildPanelHTML("00", "Agotamiento y fricción del modelo", "Introducción. Archivo Orsini × MAYRIT Bienal 2026.", intro, ["104 imágenes", "16 vídeos", "4 categorías"]);
 }
 
 function openPanel(catKey) {
   if (catKey && catKey !== "all") renderPanel(catKey);
   else renderPanelAll();
   panel.classList.add("open");
-  document.querySelector(".info-btn").classList.add("active");
 }
 
 function closePanel() {
   panel.classList.remove("open");
-  document.querySelector(".info-btn").classList.remove("active");
 }
-
-document.querySelector(".info-btn").addEventListener("click", () => {
-  if (panel.classList.contains("open")) closePanel();
-  else openPanel(document.querySelector(".fbtn.on")?.dataset.f || "all");
-});
 
 /* ── FILTROS ── */
 
@@ -256,7 +256,8 @@ document.querySelectorAll(".fbtn").forEach((btn) => {
     btn.classList.add("on");
     pool = makePool(btn.dataset.f);
     buildGrid();
-    if (panel.classList.contains("open")) openPanel(btn.dataset.f);
+    if (btn.dataset.f !== "all") renderPanel(btn.dataset.f);
+    else renderPanelAll();
   });
 });
 
@@ -312,18 +313,18 @@ gallery.addEventListener("click", (e) => {
     document.querySelector('.fbtn[data-f="all"]').classList.add("on");
     pool = makePool("all");
     buildGrid();
-    openPanel("all");
+    renderPanelAll();
   } else {
     document.querySelectorAll(".fbtn").forEach((b) => b.classList.remove("on"));
     const matchBtn = document.querySelector(`.fbtn[data-f="${cat}"]`);
     if (matchBtn) matchBtn.classList.add("on");
     pool = makePool(cat);
     buildGrid();
-    openPanel(cat);
+    renderPanel(cat);
   }
 });
 
 /* ── INIT ── */
 refresh();
 animate();
-setTimeout(() => openPanel("all"), 50);
+renderPanelAll();
